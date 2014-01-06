@@ -1,0 +1,39 @@
+//Problem:Booklist on opc.iarcs.org.in
+//Note this solution gets only 60/100 marks, will update with faster solution later
+
+#include <iostream>
+#include<algorithm>
+using namespace std;
+ 
+int main() 
+{
+        int m,n;
+        cin>>m;
+        int books[1000010],brorder[5000];
+        for(int i =1;i<=m;i++)
+                cin>>books[i];
+        cin>>n;
+        for(int i=1;i<=n;i++)
+                cin>>brorder[i];
+        // denote book taken by -1
+        for(int i=1;i<=n;i++)
+        {
+                int t = brorder[i];
+                int found =0;
+                for(int j=1,temp=0;j<=m&&!found;j++)
+                {
+                        if(books[j]!=-1)
+                        {
+                                temp++;
+                        }
+                        if(temp==t)
+                        {
+                                found++;
+                                cout<<books[j]<<endl;
+                                books[j]=-1;
+                        }
+                        
+                }
+        }
+        return 0;
+}
