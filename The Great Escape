@@ -27,10 +27,6 @@ void bfs()
 			if(buildings[v][i]==1&&!visitednode[i])
 			{
 				mindisttonode[i] = min(mindisttonode[i], mindisttonode[v]+1);
-				if(mindisttonode[v]+1<mindisttonode[i])
-				{
-					mindisttonode[i] = mindisttonode[v]+1;
-				}
 				visitednode[i]=1;
 				myqueue.push(i);
 			}
