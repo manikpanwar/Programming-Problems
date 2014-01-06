@@ -1,0 +1,49 @@
+// Problem: Average on opc.iarcs.org.in
+
+#include <iostream>
+#include <algorithm>
+using namespace std;
+ 
+int main() {
+ 
+        int n,a[10011];
+        int count = 0;
+        cin>>n;
+        for(int i=1;i<=n;i++)
+        cin>>a[i];
+        int lower,upper;
+        sort(a+1,a+n+1);
+        for(int i=1;i<=n;i++)
+        {
+        	lower=i;
+        	upper=i;
+        	int found = 0;
+        	while(lower>0&&upper<=n&&!found)
+        	{
+        		if((a[lower]+a[upper]==2*a[i])&&(lower!=i||upper!=i))
+        		{
+        			count++;
+        			found++;
+        		}
+        		if(lower==i&&upper==i)
+        		{
+        			if(a[i-1]==a[i])
+        			{
+        				count++;
+        				found++;
+        			}else if(a[i+1]==a[i])
+        			{
+        				count++;
+        				found++;
+        			}
+        		}
+ 
+        		if(a[lower]+a[upper]>2*a[i])
+        		lower--;
+        		else
+        		upper++;
+        	}
+        }
+        cout<<count;
+        return 0;
+}
