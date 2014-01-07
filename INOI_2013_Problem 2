@@ -1,0 +1,104 @@
+/*
+  Solution to INOI 2013 problem 2 by Manik Panwar
+  Implemented with DFS, could be implemented with BFS as well
+  NOTE: It is a key property of the Depth First search that
+  we don't visit the same node more than once
+  otherwise it is quite possible that we will recurse infinitely.
+*/
+#include <iostream>
+#include<algorithm>
+using namespace std;
+
+const int king = 1;
+int n,k;
+int ids[400][400];
+int graph[400][400];
+int visited[400];
+int numberofnodes=0;
+
+int check(int i,int j)
+{
+	int related=0;
+	int count = 0;			//if count>=k then related
+	int a=1,b=1;
+	while(a<=ids[i][0]&&b<=ids[j][0]&&!related)
+	{
+		//Simultaneous Linear Search on sorted arrays
+		if(ids[i][a]==ids[j][b])
+		{
+			count++;
+			a++;
+			b++;
+		}else if(ids[i][a]>=ids[j][b])
+		{
+			b++;//As sorted so maybe next element in b array is equal to ids[i][a]
+		}else
+		{
+			a++;
+		}
+		if(count==k)
+		related = 1;
+	}
+
+	//Return true if related, else false
+	return related;
+}
+
+
+void dfs(int node);
+
+int main() 
+{
+	cin>>n>>k;
+	for(int i=1;i<=n;i++)
+	{
+		cin>>ids[i][0];		//ids[i][0] denotes number of elements in id
+		int temp = 1;
+		while(temp<=ids[i][0])
+		cin>>ids[i][temp++];		//Check
+		sort(ids[i]+1,ids[i]+ids[i][0]+1);
+	}
+	
+	for(int i=0;i<=n;i++)
+	{
+		visited[i]=0;
+		for(int j=0;j<=n;j++)
+		{
+			graph[i][j]=0;
+			graph[j][i]=0;
+		}
+	}
+	for(int i=1;i<=n;i++)
+	{
+		for(int j=i+1;j<=n;j++)
+		{
+			//Graph[i][j]==1 if related
+				int temp = check(i,j);
+				if(temp)
+				{
+					graph[i][j]=1;
+					graph[j][i]=1;
+				}
+		}
+			
+	}
+	
+	// At this point Graph is constructed, have to check number of nodes connected to king
+	dfs(king);//Could have solved with bfs as well
+	cout<<numberofnodes;
+	return 0;
+}
+
+void dfs(int pos)		//Recursive Version
+{
+	numberofnodes++;
+	visited[pos]=1;
+	for(int i=1;i<=n;i++)
+	{
+		if(!visited[i]&&graph[pos][i])
+		{
+			dfs(i);
+		}
+	}
+	visited[pos]=0;
+}
