@@ -7,7 +7,7 @@ Edits/improvements are welcome!
 
 <b>Reference: </b>
 <ol>
-<li>Algorithms on TopCoder
+<li>Algorithm Tutorials on TopCoder
 <li>Introduction to Algorithms by CLRS
 <li>GeeksForGeeks
 <li>Solutions on IARCS website
