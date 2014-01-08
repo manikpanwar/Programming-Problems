@@ -113,3 +113,77 @@ int dfs(int pos)
 	}
 }*/
 	
+	
+/*
+#include <iostream>
+using namespace std;
+ 
+int edg(int);
+int k=0,m=0,n=0;
+int graph[4000][4000];
+int edges[4000];
+ 
+int main() 
+{
+	cin>>n>>m>>k;
+	int t1,t2;
+	for(int i=0;i<4000;i++) 
+	{
+		edges[i]=-1;
+		for(int j=0;j<4000;j++)
+		{
+			graph[i][j]=0;
+		}
+	}
+	for(int i=1;i<=m;i++)
+	{
+		cin>>t1>>t2;
+		graph[t1][t2]=1;
+		graph[t2][t1]=1;
+	}
+ 	for(int i=1;i<=n;i++)
+ 	{
+ 		edges[i] = edg(i);		//Contains actual edges for vertex I which contribute to k
+ 	} //actual edges means nodes which themselves have >=k edges and can be used in the force
+ 	int size = 0;
+ 	for(int i=1;i<=n;i++)
+ 	{
+ 		if(edges[i]>=k)
+ 		{
+ 			size++;
+ 		}
+ 	}
+ 	if(size>0)
+ 	{
+ 		cout<<"YES"<<endl<<size;
+ 	}else
+ 	cout<<"NO";
+}
+
+int edg(int i)
+{
+	if(edges[i]==-1)
+	{
+		edges[i]=0;
+		int a = 0;
+		for(int j=1;j<=n;j++)
+		{	
+			if(graph[i][j]==1&&edges[j]!=-1)
+			{
+				if(edges[j]>=k)
+				a++;
+			}
+			if(graph[i][j]==1&&edges[j]==-1)
+			{
+				int t = edg(j);
+				if(t>=k)
+				a++;
+			}
+		
+		}
+		cout<<a<<endl;
+		return a;
+	}
+	else
+	return edges[i];
+}*/
