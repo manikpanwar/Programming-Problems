@@ -100,5 +100,5 @@ void dfs(int pos)		//Recursive Version
 			dfs(i);
 		}
 	}
-	visited[pos]=0;
+			//visited[pos]=0; not sure why topcoder algorithms include this step in dfs
 }
