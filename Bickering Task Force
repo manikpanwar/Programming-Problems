@@ -1,12 +1,13 @@
-//NOT WORKING
+// Solution to Bickering Task Force by Manik Panwar
+// NOTE: This gets only 50/100 points and gives tle in rest of cases
+// Have to figure out another algo, and will update when I get one
+
 #include <iostream>
 using namespace std;
  
-int edges(int);
 int k=0,m=0,n=0,size = 0;
 int graph[3001][3001];
 int force[3001];
-int edge[3001];
  
 int main() 
 {
@@ -14,9 +15,7 @@ int main()
         int t1,t2;
         for(int i=0;i<3001;i++) 
         {
-                
-                force[i]=0;
-                edge[i]=-1;
+                force[i]=1;
                 for(int j=0;j<3001;j++)
                 {
                         graph[i][j]=0;
@@ -28,43 +27,43 @@ int main()
                 graph[t1][t2]=1;
                 graph[t2][t1]=1;
         }
-                int count = 0;
-        for(int i =1;i<=n;i++)
-        {
-                count = 0;
-                if(edge[i]==-1)
-                {
-                        for(int j = 1;j<=n;j++)
-                        {
-                                if(graph[i][j]==1&&edge[i]==-1)
-                                {
-                                        if(edges(j)>=k&&edge[j]!=-1)
-                                        count++;
-                                }
-                        }
-                        if(count>=k&&force[i]==0)
-                        {
-                                force[i]++;     
-                                size++;
-                        }
-                        edge[i]=count;
-                }
-                
-        }
-    if(size>0)
-    cout<<"YES"<<endl<<size;
-    else
-    cout<<"NO";
-    
+   		int count = 0;
+   		bool done  = false;
+   		while(!done)
+   		{
+   			done = true;
+   			count = 0;
+   			for(int i =1;i<=n;i++)
+   			{
+   				count = 0;
+   				if(force[i]!=-1)
+   				{
+   					for(int j = 1;j<=n;j++)
+   					{
+   					  if(graph[i][j]&&force[j]!=-1)	//-1 means removed from force
+   					  count++;
+   					}
+   					if(count<k)
+   					{
+   						done = false;
+   						force[i]=-1;
+   					}
+   				}
+   			}
+   		}
+ 
+   		for(int i=1;i<=n;i++)
+   		{
+   			if(force[i]==1)
+   			{
+   				size+=1;
+   			}
+   		}
+ 
+    	if(size>0)
+    	cout<<"YES"<<endl<<size;
+    	else
+    	cout<<"NO";
+ 
     return 0;
 }    
- 
-int edges(int pos)
-{
-        int co = 0;
-        for(int i=1;i<=n;i++)
-        if(graph[i][pos])
-        co++;
-        
-        return co;
-}
