@@ -1,189 +1,60 @@
 //NOT WORKING
 #include <iostream>
 using namespace std;
-
-int dfs(int);
-int k=0,m=0,n=0;
-int graph[5000][5000];
-int size = 0;	//Of taskforce
-int visited[5000];
-int force[5000];
-
-int main() 
-{
-	cin>>n>>m>>k;
-	int t1,t2;
-	for(int i=0;i<4000;i++) 
-	{
-		visited[i]=0;
-		force[i]=0;
-		for(int j=0;j<4000;j++)
-		{
-			graph[i][j]=0;
-		}
-	}
-	for(int i=1;i<=m;i++)
-	{
-		cin>>t1>>t2;
-		graph[t1][t2]=1;
-		graph[t2][t1]=1;
-	}
-	
-	 for(int i=1;i<=n;i++)
-	 {
-	 
-	    int t =dfs(i);
-	    if(t)
-	    force[i]=1;
-	 }
-
-	for(int i=1;i<=n;i++)
-	size+=force[i];
-	
-	if(size>0)
-	{
-		cout<<"YES"<<endl<<size;
-	}else
-	{
-		cout<<"NO";
-	}
-
-	return 0;
-}
-
-int dfs(int pos)
-{
-	int co = 0;
-	if(!visited[pos])
-	{
-		visited[pos]=1;
-		for(int i=1;i<=n;i++)
-		{
-			if(graph[pos][i]==1&&!visited[i])
-			{
-				int t = dfs(i);
-				if(t==1)
-				{
-					co++;
-				
-				}
-			}
-			if(graph[pos][i]==1&&force[i]==1)
-			{
-				co++;
-			}
-		}
-	}else if(force[pos]==1)
-	{
-		co=k;
-		cout<<"A";
-	}
-	 if(co>=k)
-	 return 1;
-	 else 
-	 return 0;
-	
-	
-}
-/*	int count=0;
-	if(!visited[pos])
-	{
-		visited[pos]=1;
-		for(int i=1;i<=n;i++)
-		{
-			if(graph[pos][i]==1)
-			{
-				int t = dfs(i);
-				if(t==1)
-				count++;
-			}
-		}
-	}else if(force[pos]==1)	//	visited
-	{
-		count=k+1;
-		cout<<"a";
-	}
-	if(count>=k)
-	{
-		force[pos] = 1;
-		return 1;
-	}else
-	{
-		return 0;
-	}
-}*/
-	
-	
-/*
-#include <iostream>
-using namespace std;
  
-int edg(int);
-int k=0,m=0,n=0;
-int graph[4000][4000];
-int edges[4000];
+int edges(int);
+int k=0,m=0,n=0,size = 0;
+int graph[3001][3001];
+int force[3001];
+int edge[3001];
  
 int main() 
 {
-	cin>>n>>m>>k;
-	int t1,t2;
-	for(int i=0;i<4000;i++) 
-	{
-		edges[i]=-1;
-		for(int j=0;j<4000;j++)
-		{
-			graph[i][j]=0;
-		}
-	}
-	for(int i=1;i<=m;i++)
-	{
-		cin>>t1>>t2;
-		graph[t1][t2]=1;
-		graph[t2][t1]=1;
-	}
- 	for(int i=1;i<=n;i++)
- 	{
- 		edges[i] = edg(i);		//Contains actual edges for vertex I which contribute to k
- 	} //actual edges means nodes which themselves have >=k edges and can be used in the force
- 	int size = 0;
- 	for(int i=1;i<=n;i++)
- 	{
- 		if(edges[i]>=k)
- 		{
- 			size++;
- 		}
- 	}
- 	if(size>0)
- 	{
- 		cout<<"YES"<<endl<<size;
- 	}else
- 	cout<<"NO";
-}
-
-int edg(int i)
-{
-	if(edges[i]==-1)
-	{
-		edges[i]=0;
-		int a = 0;
-		for(int j=1;j<=n;j++)
-		{	
-			if(graph[i][j]==1&&edges[j]!=-1)
-			{
-				if(edges[j]>=k)
-				a++;
-			}
-			if(graph[i][j]==1&&edges[j]==-1)
-			{
-				int t = edg(j);
-				if(t>=k)
-				a++;
-			}
-		
-		}
-		cout<<a<<endl;
-		return a;
-	}
-	else
-	return edges[i];
-}*/
+        cin>>n>>m>>k;
+        int t1,t2;
+        for(int i=0;i<3001;i++) 
+        {
+ 
+                force[i]=0;
+                edge[i]=-1;
+                for(int j=0;j<3001;j++)
+                {
+                        graph[i][j]=0;
+                }
+        }
+        for(int i=1;i<=m;i++)
+        {
+                cin>>t1>>t2;
+                graph[t1][t2]=1;
+                graph[t2][t1]=1;
+        }
+   		int count = 0;
+    	for(int i =1;i<=n;i++)
+    	{
+    		count = 0;
+    		if(edge[i]==-1)
+    		{
+    			for(int j = 1;j<=n;j++)
+    			{
+    				if(graph[i][j]==1&&edge[i]==-1)
+    				{
+    					if(edges(j)>=k&&edge[j]!=-1)
+    					count++;
+    				}
+    			}
+    			if(count>=k&&force[i]==0)
+    			{
+    				force[i]++;	
+    				size++;
+    			}
+    			edge[i]=count;
+    		}
+ 
+    	}
+    if(size>0)
+    cout<<"YES"<<endl<<size;
+    else
+    cout<<"NO";
+ 
+    return 0;
+}    
