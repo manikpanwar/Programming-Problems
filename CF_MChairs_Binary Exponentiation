@@ -1,0 +1,44 @@
+// Solution to missing some chairs problem on codechef by Manik Panwar
+// Uses modular binary exponentiation
+#include <iostream>
+#include<math.h>
+using namespace std;
+#define mod 1000000007
+ 
+long long int modulo_exp(int base,int exp)
+{
+	if(exp==1)
+	return base;
+	else
+	{
+		if(exp%2==0)
+		{
+			long long int b=pow(modulo_exp(base,exp/2),2);
+			if(b>=mod)
+			return b%mod;
+			else 
+			return b;
+		}else
+		{
+			long long int a=base*pow(modulo_exp(base,(exp-1)/2),2);
+			if(a>=mod)
+			return a%mod;
+			else 
+			return a;
+		}
+	}
+	
+}
+ 
+int main() {
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n;
+		cin>>n;
+		cout<<(modulo_exp(2,n)-1)<<endl;
+		
+	}
+	return 0;
+} 
