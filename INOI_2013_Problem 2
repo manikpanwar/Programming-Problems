@@ -4,6 +4,7 @@
   NOTE: It is a key property of the Depth First search that
   we don't visit the same node more than once
   otherwise it is quite possible that we will recurse infinitely.
+  EDIT: Has been checked with test data
 */
 #include <iostream>
 #include<algorithm>
