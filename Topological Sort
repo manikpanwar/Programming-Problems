@@ -1,0 +1,61 @@
+//TOPOLOGICAL SORT, assuming graph is a DAG
+//Have to figure out how to check whether not a DAG with this implementation
+#include <iostream>
+#include<stack>
+using namespace std;
+
+void dfs(long);
+
+long visited[10001];
+long graph[10001][10001];
+long no_visited = 0;
+long n,m;
+stack <long> mystack;
+
+int main() {
+	
+	cin>>n>>m;
+	long t1,t2;
+	for(long i = 0;i<=10000;i++)
+	{
+		visited[i]=0;
+		for(long j = 0;j<=10000;j++)
+		{
+			graph[i][j]=0;
+		}
+	}
+	for(long i = 1;i<=m;i++)
+	{
+		cin>>t1>>t2;
+		graph[t1][t2]=1;
+	}
+	for(long i =n;i>=1;i--)
+	{
+		if(visited[i]==0)
+		{
+			dfs(i);
+		}
+	}
+		while(!mystack.empty())
+		{
+			cout<<mystack.top()<<" ";
+			mystack.pop();
+		}
+	return 0;
+}
+void dfs(int v)
+{
+	no_visited++;
+	visited[v] = 1;
+	for(int i=1;i<=n;i++)
+	{
+		if(graph[v][i]==1&&visited[i]==0)
+		{
+			dfs(i);
+		}
+	}
+	mystack.push(v);
+}
+
+
+
