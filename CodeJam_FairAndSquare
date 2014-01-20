@@ -1,0 +1,49 @@
+//Solution to https://code.google.com/codejam/contest/dashboard?c=2270488#s=p2 by Manik Panwar
+
+#include <iostream>
+#include<math.h>
+#include<fstream>
+using namespace std;
+ 
+int palindrome(long long number)
+{
+    long long reverse = 0,temp;
+	temp = number;
+	while(temp>0)
+	{
+ 
+		int dig = 0;
+		dig = temp%10;
+		reverse = reverse*10 + dig;
+		temp/=10;
+	}
+	return (number==reverse)?1:0;
+}
+ 
+int main() {
+	ifstream fil;
+    fil.open("input.txt",ios::in);
+    long t,k;
+	fil>>t;
+	k = t;
+	while(t--)
+	{
+		long long a,b;
+		long long start,end;
+		fil>>a>>b;
+		start = ceil(sqrt(a));
+		end = floor(sqrt(b));
+		int count = 0;
+		while(start<=end)
+		{
+			if(palindrome(start))
+			{
+				if(palindrome(pow(start,2)))
+				count++;
+			}
+			start++;
+		}
+		cout<<"Case #"<<k-t<<": "<<count<<endl;
+	}
+	return 0;
+}
