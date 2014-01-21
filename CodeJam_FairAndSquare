@@ -31,9 +31,12 @@ int main() {
 		long long a,b;
 		long long start,end;
 		fil>>a>>b;
+		int count = 0;
+		if(a>=0&&b>=0)
+		{
 		start = ceil(sqrt(a));
 		end = floor(sqrt(b));
-		int count = 0;
+		
 		while(start<=end)
 		{
 			if(palindrome(start))
@@ -42,6 +45,7 @@ int main() {
 				count++;
 			}
 			start++;
+		}
 		}
 		cout<<"Case #"<<k-t<<": "<<count<<endl;
 	}
