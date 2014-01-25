@@ -1,0 +1,52 @@
+// Solution to problem Chef and the Cake on codechef.com by Manik Panwar
+// Link: http://www.codechef.com/problems/CAKE1AM/
+
+#include <iostream>
+using namespace std;
+ 
+int main() {
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int cake[1002][1002];
+		int area = 0;
+		for(int i =0;i<1002;i++)
+		{
+			for(int j =0;j<1002;j++)
+			{
+				cake[i][j]=1;
+			}
+		}
+		int cut[2][2];		//0-x 1-y
+		for(int i =0;i<2;i++)
+		{
+			cin>>cut[i][0]>>cut[i][1];
+		}
+		for(int i=cut[0][0];i<cut[1][0];i++)
+		{
+			for(int j=cut[1][1];j>cut[0][1];j--)
+			{
+				cake[i][j]=0;
+				area++;
+			}
+		}
+		for(int i =0;i<2;i++)
+		{
+			cin>>cut[i][0]>>cut[i][1];
+		}
+		for(int i=cut[0][0];i<cut[1][0];i++)
+		{
+			for(int j=cut[1][1];j>cut[0][1];j--)
+			{
+				if(cake[i][j]==1)
+				{
+					cake[i][j] = 0;
+					area++;
+				}
+			}
+		}
+		cout<<area<<endl;
+	}
+	return 0;
+}
