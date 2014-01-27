@@ -1,0 +1,54 @@
+//https://code.google.com/codejam/contest/90101/dashboard#s=p2
+
+#include <iostream>
+#include<stdio.h>
+#include<fstream>
+#include<string.h>
+ 
+using namespace std;
+ 
+int main() {
+    fstream fil("input.txt",ios::in);
+    int t;
+    fil>>t;
+    int temp = t;
+    char str[51] = {"welcome to code jam"};
+    while(t>0)
+    {
+        t--;
+        char inp[501];
+        fil.getline(inp,80);
+        int dp[20][501];
+        for(int i = 0;i<20;i++)
+        {
+            for(int j =0;j<501;j++)
+            dp[i][j]=0;
+        }
+        for(int i = 0;i<501;i++)
+        {
+            dp[0][i]=1;
+        }
+        for(int i = 0;i<20;i++)
+        {
+            dp[i][0]=0;
+        }
+        dp[0][0]=1;
+        for(int i = 0;i<19;i++)
+        {
+            for(int j = 0;j<strlen(inp);j++)   
+            {
+                if(str[i]==inp[j])
+                {
+                    dp[i+1][j+1]+=dp[i][j]+dp[i+1][j];
+                }else
+                {
+                    dp[i+1][j+1]=dp[i+1][j];
+                }
+            }
+        }
+        int u =strlen(inp);
+        cout<<"Case #"<<temp-t<<": ";
+        printf ("%04d\n", dp[19][u]);
+    }
+    return 0;
+}
