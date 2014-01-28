@@ -1,2 +1,38 @@
-
 Bitwise Manipulation : http://www.codechef.com/wiki/tutorial-bitwise-operations
+
+// Longest Common Subsequence
+#include <iostream>
+#include <string.h>
+#include <stdio.h>
+using namespace std;
+ 
+int main() {
+	char s1[1001],s2[1001];
+	while(gets(s1))
+	{
+	  gets(s2);
+	  int l1 = strlen(s1);
+	  int l2 = strlen(s2);
+	  int dp[1001][1001];
+	  for(int i =0;i<=1000;i++)
+	  {
+	  	for(int j = 0;j<=1000;j++)
+	  	dp[i][j] = 0;
+	  }
+	  for(int counter1 =0;counter1<l1;counter1++)
+	  {
+	  	for(int counter2 =0;counter2<l2;counter2++)
+	  	{
+	  		if(s1[counter1]==s2[counter2])
+	    	{
+	    		dp[counter1+1][counter2+1] = max(dp[counter1+1][counter2] + 1,dp[counter1][counter2+1] + 1);
+	    	}else
+	    	{
+	    		dp[counter1+1][counter2+1] = max(dp[counter1+1][counter2],dp[counter1][counter2+1]);
+	    	}
+	  	}
+	  }
+	  cout<<dp[l1][l2]<<endl;
+	}
+	return 0;
+}
