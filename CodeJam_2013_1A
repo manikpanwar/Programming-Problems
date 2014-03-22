@@ -1,0 +1,35 @@
+//http://code.google.com/codejam/contest/2418487/dashboard#s=p0&a=0
+
+#include <iostream>
+ 
+using namespace std;
+ 
+long n;
+int main() {
+	int T;
+	cin>>T;
+	while(T--)
+	{
+		n = 0;
+		long r,t;
+		cin>>r>>t;
+ 
+		int mid = 0;
+		int lo = 1, high = t;             //Note for larger inputs will need to use larger size vars,possibly big int
+		while(lo<=high)
+		{	
+			mid = (lo+high)/2;
+			if(t<mid*(2*r + 2*mid - 1))
+			{
+				high = mid-1;
+			}else 
+			{
+				lo = mid+1;
+				n = mid;
+			}
+		}
+ 
+		cout<<n<<endl;
+	}
+	return 0;
+}
