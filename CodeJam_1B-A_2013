@@ -1,7 +1,6 @@
 //https://code.google.com/codejam/contest/2434486/dashboard#s=p0&a=0
 //Note: Only checked with given examples
-//Will check with the input when I get an IDE, writing on ideone now
-
+//update: checked with data, fails in about 10% cases, maybe I'm missing some particular situation here
 #include <iostream>
 #include <algorithm>
  
